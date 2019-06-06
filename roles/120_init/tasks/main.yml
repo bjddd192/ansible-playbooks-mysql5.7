@@ -1,0 +1,77 @@
+# 检查 mysql 数据目录是否存在，存在则不进行安装
+- name: 检查 mysql 是否已安装
+  stat: path="{{ v_mysql_data_dir }}"
+  register: install_check
+  ignore_errors: true
+
+- name: 如目录存在则中断退出安装  
+  fail: msg="安装失败：mysql数据目录 {{ v_mysql_data_dir }} 已存在，请检查！"
+  when: install_check.stat.exists==true
+
+- name: 准备 mysql 工作目录
+  file: name={{ item }} state=directory
+  with_items:
+  - "{{ v_mysql_work_dir }}"
+  - "{{ v_mysql_data_dir }}"
+  - "{{ v_mysql_binlog_dir }}"
+  - "{{ v_mysql_slowlog_dir }}"
+  - "{{ v_mysql_backup_dir }}"
+  - "{{ v_mysql_command_dir }}"
+  - "{{ v_mysql_undolog_dir }}"
+  - "{{ v_mysql_tmp_dir }}"
+
+- name: 初始化配置文件
+  template: src=my.ini dest=/etc/my.cnf
+
+# - name: 重启 mysql 服务
+#   systemd:
+#     name: mysql
+#     state: restarted
+# 
+# - name: 设置数据库密码
+#   shell: mysql -e "update mysql.user set password=password('{{ mysql_password }}'),password_expired='N' where user='root';"
+# 
+# - name: 设置在服务器免密登录数据库
+#   shell: mysql -e "update mysql.user set password=password('') where user='root' and host='localhost';"
+# 
+# - name: 刷新权限使生效
+#   shell: mysql -e "flush privileges;"
+# 
+# - name: 替换回默认的配置文件
+#   copy: src=my_default.cnf dest=/usr/my.cnf
+# 
+# - name: 重启 mysql 服务
+#   systemd:
+#     name: mysql
+#     state: restarted
+# 
+# - name: 添加root远程登录帐号
+#   shell: mysql -e "grant all privileges on *.* to 'root'@'%' identified by '{{ mysql_password }}' with grant option;"
+# 
+# - name: 刷新权限使生效
+#   shell: mysql -e "flush privileges;"
+# 
+# - name: 停止 mysql 服务
+#   systemd:
+#     name: mysql
+#     state: stopped
+# 
+# - name: 复制 mysql 数据文件
+#   shell: cp -r /var/lib/mysql/* {{ mysql_data_dir }}
+#   when: install_check.stat.exists==false
+# 
+# - name: 给 mysql 相关目录赋权
+#   shell: chown -R mysql:mysql {{ mysql_work_dir }}/mysql_{{ mysql_port }}*
+# 
+# - name: 删除默认的配置文件
+#   file: name=/usr/my.cnf state=absent
+# 
+# - name: 复制最终的配置文件
+#   template: src=my.cnf dest=/usr/my.cnf
+# 
+# - name: 重启 mysql 服务，并开启自启动
+#   systemd:
+#     name: mysql
+#     daemon_reload: yes
+#     state: restarted
+#     enabled: yes

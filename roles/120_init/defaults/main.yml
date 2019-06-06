@@ -1,0 +1,59 @@
+# mysql 管理员账号(默认值)
+v_mysql_user: "root"
+# mysql 端口
+v_mysql_port: "3306"
+# mysql 管理员初始密码(大小写+数字+特殊字符)
+v_mysql_password: "DataMan2019+"
+# mysql 工作目录
+v_mysql_work_dir: "/data/mysql_{{ v_mysql_port }}"
+# mysql 数据目录
+v_mysql_data_dir: "{{ v_mysql_work_dir }}/data"
+# mysql binlog 日志目录
+v_mysql_binlog_dir: "{{ v_mysql_work_dir }}/binlog"
+# mysql 临时表空间目录
+v_mysql_tmp_dir: "{{ v_mysql_work_dir }}/tmp"
+# mysql undo log 目录
+v_mysql_undolog_dir: "{{ v_mysql_work_dir }}/undolog"
+# mysql 慢查询日志
+v_mysql_slowlog_dir: "{{ v_mysql_work_dir }}/slowlog"
+# mysql 备份目录
+v_mysql_backup_dir: "{{ v_mysql_work_dir }}/backup"
+# mysql 相关脚本目录
+v_mysql_command_dir: "{{ v_mysql_work_dir }}/command"
+# mysql 默认字符集
+v_mysql_default_character_set: "utf8mb4"
+# mysql 默认服务器排序字符集设置(常用：utf8_general_ci utf8_bin utf8mb4_general_ci utf8mb4_unicode_ci)
+v_mysql_collation_server: "utf8mb4_unicode_ci"
+# mysql 默认的事务隔离级别
+v_mysql_transaction_isolation: "REPEATABLE-READ"
+# mysql 服务的唯一ID，默认是 1 ，通常采用本机 IP 后位数，主从必须保持独立性。
+v_mysql_server_id: "1"
+# mysql binlog 保留时间，视具体需求而定。
+v_mysql_expire_logs_days: "30"
+# 当每进行 n 次事务提交之后，MySQL 将进行一次 fsync 之类的磁盘同步指令来将 binlog_cache 中的数据强制写入磁盘。
+# 安全用 1，追求速度用 0
+v_mysql_sync_binlog: "1"
+# 是否启用半同步复制
+v_enable_rpl_semi_sync: "1"
+# 查询超过多少秒的视为慢查询，记录日志
+v_mysql_long_query_time: "2"
+# 服务器支持的最大连接数
+v_mysql_max_connections: "2000"
+# 用户能最大连接进来的数量
+v_mysql_max_user_connections: "1500"
+# 最大错误连接数
+v_mysql_max_connect_errors: "1000000"
+# 服务器关闭非交互连接之前等待活动的秒数。客户端如果未使用连接池技术，需配置此值，如果客户端使用连接池技术，保持默认就行。
+v_mysql_wait_timeout: "28800"
+# 服务器关闭交互连接之前等待活动的秒数。
+v_mysql_interactive_timeout: "28800"
+# InnoDB 存储引擎的表数据和索引数据的最大内存缓冲区大小。可以设置为机器物理内存大小的60%~70%
+v_mysql_innodb_buffer_pool_size: "2G"
+# 当设置为0，该模式速度最快，但不太安全，mysqld进程的崩溃会导致上一秒钟所有事务数据的丢失。
+# 当设置为1，该模式是最安全的，但也是最慢的一种方式。在 mysqld 服务崩溃或者服务器主机 crash 的情况下，binary log 只有可能丢失最多一个语句或者一个事务。
+# 当设置为2，该模式速度较快，也比 0 安全，只有在操作系统崩溃或者系统断电的情况下，上一秒钟所有事务数据才可能丢失。
+v_mysql_innodb_flush_log_at_trx_commit: "1"
+# 事务等待获取资源等待的最长时间，超过这个时间还未分配到资源则会返回应用失败；参数的时间单位是秒，默认值为 50
+v_mysql_innodb_lock_wait_timeout: "30"
+# 设置数据库为只读(一般为从库)
+v_mysql_read_only: "OFF"

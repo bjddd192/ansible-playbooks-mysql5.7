@@ -1,0 +1,35 @@
+- name: 下载 MySQL 安装包
+  get_url: url={{ item }} dest=/tmp
+  with_items:
+  - "{{ v_mysql_download_url }}"
+
+- name: 解压 MySQL 安装包
+  unarchive:
+    # src 也可以直接填写一个 URL 地址直接进行下载解压
+    src: "/tmp/mysql-{{ v_mysql_version }}-1.el7.x86_64.rpm-bundle.tar"
+    copy: no
+    dest: "/tmp"
+
+- name: 卸载 Mariadb
+  yum: name={{ item }} state=absent
+  with_items:
+  - mariadb-libs
+
+- name: 关闭 selinux
+  selinux: state=disabled
+
+- name: 安装必备组件
+  yum: update_cache=yes name={{ item }} state=present
+  with_items:
+  - libaio
+  - net-tools
+  - perl-Getopt-Long
+  - perl-Data-Dumper
+  - perl-JSON
+
+- name: 安装 MySQL 组件
+  shell: "rpm -ivh /tmp/mysql-community-common-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
+    rpm -ivh /tmp/mysql-community-libs-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
+    rpm -ivh /tmp/mysql-community-client-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
+    rpm -ivh /tmp/mysql-community-server-{{ v_mysql_version }}-1.el7.x86_64.rpm "
+

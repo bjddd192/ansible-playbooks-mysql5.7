@@ -1,0 +1,2 @@
+# mysql 包下载地址
+v_mysql_download_url: "https://downloads.mysql.com/archives/get/file/mysql-{{ v_mysql_version }}-1.el7.x86_64.rpm-bundle.tar"
