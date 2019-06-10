@@ -57,3 +57,5 @@ v_mysql_innodb_flush_log_at_trx_commit: "1"
 v_mysql_innodb_lock_wait_timeout: "30"
 # 设置数据库为只读(一般为从库)
 v_mysql_read_only: "OFF"
+# 设置数据库初始化是否使用安全模式(1:是 0:否)
+v_mysql_initialize_secure: "1"
