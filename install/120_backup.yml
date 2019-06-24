@@ -1,4 +1,0 @@
-- hosts: 
-  - mysql_server_backup
-  roles: 
-  - backup

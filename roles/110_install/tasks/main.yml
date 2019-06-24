@@ -31,5 +31,6 @@
   shell: "rpm -ivh /tmp/mysql-community-common-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
     rpm -ivh /tmp/mysql-community-libs-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
     rpm -ivh /tmp/mysql-community-client-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
-    rpm -ivh /tmp/mysql-community-server-{{ v_mysql_version }}-1.el7.x86_64.rpm "
+    rpm -ivh /tmp/mysql-community-server-{{ v_mysql_version }}-1.el7.x86_64.rpm && \
+    rpm -ivh /tmp/mysql-community-libs-compat-{{ v_mysql_version }}-1.el7.x86_64.rpm"
 
