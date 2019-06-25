@@ -1,0 +1,42 @@
+# mysql 服务器地址
+v_mysql_host: "localhost"
+# mysql 管理员账号(默认值)
+v_mysql_user: "root"
+# mysql 端口
+v_mysql_port: "3306"
+# mysql 管理员初始密码(大小写+数字+特殊字符)
+v_mysql_password: "DataMan2019+"
+# mysql 配置文件路径
+v_def_cnf: "/etc/my.cnf"
+# mysql 工作目录
+v_mysql_work_dir: "/data/mysql_{{ v_mysql_port }}"
+# mysql 备份目录
+v_mysql_backup_dir: "{{ v_mysql_work_dir }}/backup"
+# mysql 相关脚本目录
+v_mysql_command_dir: "{{ v_mysql_work_dir }}/command"
+# 邮件服务器地址
+v_email_smtp_server: "smtp.exmail.qq.com"
+# 邮件发送人账号
+v_email_smtp_auth_username: ""
+# 邮件发送人账号密码
+v_email_smtp_auth_password: ""
+# 邮件发送人
+v_email_smtp_from: "{{ v_email_smtp_auth_username }}"
+# 邮件发送标题
+v_email_tags: ""
+# 备份发送成功收件人
+v_email_addressee_successed: ""
+# 备份发送失败收件人
+v_email_addressee_failed: ""
+# 邮件发送人
+v_email_sender: "{{ v_email_smtp_auth_username }}"
+# xtrabackup yum 仓库 url 地址
+v_xtrabackup_repo_url: "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
+# 备份保留天数
+v_keep_days_backup: "30"
+# 日志保留天数
+v_keep_days_log: "30"
+# 备份执行时间（小时）
+v_cron_hour: "0"
+# 备份执行时间（分钟）
+v_cron_minute: "30"

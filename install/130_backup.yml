@@ -1,4 +1,4 @@
 - hosts: 
-- mysql_server
-roles: 
-- ../roles/130_backup
+  - mysql_server
+  roles: 
+  - ../roles/130_backup
