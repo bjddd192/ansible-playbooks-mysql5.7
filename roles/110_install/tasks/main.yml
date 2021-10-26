@@ -14,6 +14,8 @@
   yum: name={{ item }} state=absent
   with_items:
   - mariadb-libs
+  - mariadb-config
+  - mariadb-common
 
 - name: 关闭 selinux
   selinux: state=disabled
