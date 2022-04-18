@@ -19,32 +19,32 @@
   - "{{ v_mysql_undolog_dir }}"
   - "{{ v_mysql_tmp_dir }}"
 
-- name: 初始化配置文件
-  template: src=my.ini dest=/etc/my.cnf
-
-- name: 初始化数据库(非安全模式)
-  shell: /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql --initialize-insecure
-  when: v_mysql_initialize_secure=="0"
-  
-- name: 初始化数据库(安全模式，安装完后需手工设置密码，初始密码位于{{ v_mysql_data_dir }}/{{ v_mysql_port }}_error.log)
-  shell: /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql --initialize
-  when: v_mysql_initialize_secure=="1"
-
-- name: 启动 mysql 服务，并设置开机自启动
-  systemd:
-    name: mysqld
-    state: started
-    enabled: yes
-
-- name: 设置数据库密码
-  shell: mysql -e "set password = password('{{ v_mysql_password }}');"
-  when: v_mysql_initialize_secure=="0"
-
-- name: 添加 root 远程登录帐号
-  shell: mysql -p'{{ v_mysql_password }}' -e "grant all privileges on *.* to 'root'@'%' identified by '{{ v_mysql_password }}' with grant option;"
-  when: v_mysql_initialize_secure=="0"
-
-- name: 刷新权限使生效
-  shell: mysql -p'{{ v_mysql_password }}' -e "flush privileges;"
-  when: v_mysql_initialize_secure=="0"
+# - name: 初始化配置文件
+#   template: src=my.ini dest=/etc/my.cnf
+# 
+# - name: 初始化数据库(非安全模式)
+#   shell: /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql --initialize-insecure
+#   when: v_mysql_initialize_secure=="0"
+# 
+# - name: 初始化数据库(安全模式，安装完后需手工设置密码，初始密码位于{{ v_mysql_data_dir }}/{{ v_mysql_port }}_error.log)
+#   shell: /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql --initialize
+#   when: v_mysql_initialize_secure=="1"
+# 
+# - name: 启动 mysql 服务，并设置开机自启动
+#   systemd:
+#     name: mysqld
+#     state: started
+#     enabled: yes
+# 
+# - name: 设置数据库密码
+#   shell: mysql -e "set password = password('{{ v_mysql_password }}');"
+#   when: v_mysql_initialize_secure=="0"
+# 
+# - name: 添加 root 远程登录帐号
+#   shell: mysql -p'{{ v_mysql_password }}' -e "grant all privileges on *.* to 'root'@'%' identified by '{{ v_mysql_password }}' with grant option;"
+#   when: v_mysql_initialize_secure=="0"
+# 
+# - name: 刷新权限使生效
+#   shell: mysql -p'{{ v_mysql_password }}' -e "flush privileges;"
+#   when: v_mysql_initialize_secure=="0"
 
