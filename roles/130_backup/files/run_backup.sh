@@ -154,7 +154,7 @@ echo "---------- 数据库合并作业结束 ----------" >> $log_path
 # 输出磁盘使用情况
 echo "" >> $log_path
 echo "服务器磁盘使用情况如下：" >> $log_path
-df -lhP | grep -v "/var/lib" >> $log_path
+df -lhP | grep -v "/var/lib" | grep -v "overlay" | grep -v 'tmpfs' | grep -v 'shm' >> $log_path
 
 # 发送邮件(循环多次，减少邮件发送失败的可能)
 declare -i s=1
