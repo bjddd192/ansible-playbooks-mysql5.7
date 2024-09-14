@@ -31,7 +31,7 @@ v_email_addressee_failed: ""
 # 邮件发送人
 v_email_sender: "{{ v_email_smtp_auth_username }}"
 # xtrabackup yum 仓库 url 地址
-v_xtrabackup_repo_url: "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
+v_xtrabackup_repo_url: "https://repo.percona.com/percona/yum/percona-release-latest.noarch.rpm"
 # 备份保留天数
 v_keep_days_backup: "30"
 # 日志保留天数

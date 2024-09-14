@@ -3,7 +3,7 @@
   ignore_errors: true
   
 - name: 安装 percona-xtrabackup
-  shell: "yum -y install percona-xtrabackup-24"
+  shell: "percona-release enable-only tools release && yum -y install percona-xtrabackup-24"
 
 - name: 安装必备组件
   yum: update_cache=yes name={{ item }} state=present
